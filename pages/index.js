@@ -1,6 +1,17 @@
 import Link from 'next/link';
+import { useEffect } from 'react';
 
 export default function Home() {
+  useEffect(() => {
+    async function getData(){
+      const apiGetData = 'https://localhost:3000/api/getdata';
+      const response = await fetch(apiGetData);
+      const res = await response.json();
+      console.log(res);
+    }
+    getData();
+  }, [])
+  
   return (
     <div className='App'>
       hello world!
