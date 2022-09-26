@@ -2,8 +2,9 @@ import Link from 'next/link';
 import { useEffect , useState } from 'react';
 
 export default function Home() {
-  const inputState = useState({
-
+  const [inputState,setInputState] = useState({
+    id : '',
+    pw : '',
   })
   useEffect(() => {
     async function getData(){
@@ -15,8 +16,15 @@ export default function Home() {
     getData();
   }, [])
   const inputData = (e) =>{
-    
-  }  
+    setInputState({
+      ...inputState,
+      [e.target.name] : e.target.value
+    })
+  }
+
+  const returnFnc = () =>{
+    return <Link href={`/sub/${inputState.id}/${inputState.pw}`}>href_pgs</Link>
+  }
   return (
     <div className='App'>
       hello world!
@@ -29,7 +37,7 @@ export default function Home() {
       <form>
         <input type='text' placeholder='id' name='id' onChange={inputData}/>
         <input type='password' placeholder='pw' name='pw' onChange={inputData}/>
-        <input type='submit' onClick={''}/>
+        <input type='submit' onClick={returnFnc}/>
       </form>
     </div>
   )
